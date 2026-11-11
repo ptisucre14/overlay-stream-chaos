@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stream Overlay - ch4os87</title>
+    
+    <!-- Polices Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Damion&family=Kaushan+Script&family=Montserrat:ital,wght@0,400;0,700;1,600&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+    
+    <!-- Icônes FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        :root {
+            --color-bg-dark: #07020d;
+            --color-purple: #170730;
+            --color-pink: #ff0055;
+            --color-cyan: #00e5ff;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            width: 1920px;
+            height: 1080px;
+            background: radial-gradient(circle at 40% 50%, var(--color-purple) 0%, var(--color-bg-dark) 100%);
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
+        }
+
+        /* 2. Texte STARTING */
+        .text-starting {
+            font-family: 'Anton', sans-serif;
+            font-size: 12rem;
+            line-height: 1;
+            letter-spacing: 0.05em;
+            color: white;
+            text-transform: uppercase;
+            animation: breathStarting 3.5s infinite ease-in-out alternate;
+        }
+
+        @keyframes breathStarting {
+            0% { 
+                transform: scale(1); 
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.2), 0 0 20px rgba(0, 229, 255, 0.3); 
+            }
+            100% { 
+                transform: scale(1.04); 
+                text-shadow: 0 0 20px rgba(255, 255, 255, 0.6), 0 0 50px rgba(0, 229, 255, 0.7); 
+            }
+        }
+
+        /* Sous-titre élégant */
+        .subtitle {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+        }
+
+        /* 3. Badges Réseaux Sociaux */
+        .social-pill {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.7rem 2.5rem;
+            border-radius: 9999px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        .social-pill.cyan {
+            border: 2px solid var(--color-cyan);
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.3), inset 0 0 10px rgba(0, 229, 255, 0.2);
+        }
+        .social-pill.pink {
+            border: 2px solid var(--color-pink);
+            box-shadow: 0 0 15px rgba(255, 0, 85, 0.3), inset 0 0 10px rgba(255, 0, 85, 0.2);
+        }
+
+        /* 4. Boîte de Chat */
+        .chat-container {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(12px);
+            border: 2px solid var(--color-cyan);
+            box-shadow: 
+                0 0 25px rgba(0, 229, 255, 0.2),
+                inset 0 0 20px rgba(0, 229, 255, 0.1);
+            border-radius: 20px;
+        }
+        
+        .chat-header {
+            border-bottom: 2px solid rgba(0, 229, 255, 0.3);
+            background: linear-gradient(90deg, rgba(0,229,255,0) 0%, rgba(0,229,255,0.15) 50%, rgba(0,229,255,0) 100%);
+        }
+
+        /* 5. Éléments d'arrière-plan */
+        .cyber-grid {
+            position: absolute;
+            bottom: 0; left: 0; right: 0; height: 40vh;
+            background-image: 
+                linear-gradient(to right, rgba(0, 229, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(to top, rgba(0, 229, 255, 0.1) 1px, transparent 1px);
+            background-size: 60px 60px;
+            transform: perspective(600px) rotateX(75deg);
+            transform-origin: bottom center;
+            z-index: 0;
+            mask-image: linear-gradient(to top, rgba(255,255,255,1), transparent);
+            -webkit-mask-image: linear-gradient(to top, rgba(255,255,255,1), transparent);
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            z-index: 1;
+            opacity: 0;
+            animation: riseUp linear infinite;
+        }
+        .p-cyan { box-shadow: 0 0 10px 3px var(--color-cyan); }
+        .p-pink { box-shadow: 0 0 10px 3px var(--color-pink); }
+
+        @keyframes riseUp {
+            0% { transform: translateY(110vh) scale(0.5); opacity: 0; }
+            20% { opacity: 0.6; }
+            80% { opacity: 0.6; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="w-[1920px] h-[1080px] flex relative select-none">
+
+    <!-- ARRIÈRE-PLAN : Grille et Particules fluides -->
+    <div class="cyber-grid"></div>
+    
+    <div class="particle p-cyan" style="left: 15%; animation-duration: 12s; animation-delay: 0s;"></div>
+    <div class="particle p-pink" style="left: 35%; animation-duration: 18s; animation-delay: 3s;"></div>
+    <div class="particle p-cyan" style="left: 55%; animation-duration: 15s; animation-delay: 7s;"></div>
+    <div class="particle p-pink" style="left: 75%; animation-duration: 22s; animation-delay: 1s;"></div>
+    <div class="particle p-cyan" style="left: 90%; animation-duration: 16s; animation-delay: 5s;"></div>
+
+    <!-- COLONNE GAUCHE (70%) : Contenu Principal -->
+    <div class="w-[70%] h-full flex flex-col items-center justify-center z-10 relative px-10">
+        
+        <!-- Stream Is -->
+        <div class="flex items-center justify-center gap-6 mt-6 mb-2">
+            <div class="h-[2px] w-16 bg-gradient-to-r from-transparent to-cyan-400"></div>
+            <h2 class="font-montserrat text-xl tracking-[0.5em] text-white font-bold opacity-80 uppercase">
+                Stream is
+            </h2>
+            <div class="h-[2px] w-16 bg-gradient-to-l from-transparent to-cyan-400"></div>
+        </div>
+        
+        <!-- STARTING (Gros bloc animé) -->
+        <h1 class="text-starting mb-8">STARTING</h1>
+        
+        <!-- Sous-titre élégant -->
+        <p class="subtitle text-4xl text-white mb-16 tracking-wide drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]">
+            Installez-vous bien, j'arrive !!!
+        </p>
+
+        <!-- Ligne des Réseaux Sociaux -->
+        <div class="flex flex-row items-center justify-center gap-8">
+            <!-- Discord -->
+            <div class="social-pill cyan">
+                <i class="fa-brands fa-discord text-2xl text-white"></i>
+                <span class="font-montserrat text-xl font-semibold tracking-wide text-white">ch4os87</span>
+            </div>
+            
+            <!-- TikTok -->
+            <div class="social-pill pink">
+                <i class="fa-brands fa-tiktok text-2xl text-white"></i>
+                <span class="font-montserrat text-xl font-semibold tracking-wide text-white">ch4os87</span>
+            </div>
+
+            <!-- YouTube -->
+            <div class="social-pill cyan">
+                <i class="fa-brands fa-youtube text-2xl text-white"></i>
+                <span class="font-montserrat text-xl font-semibold tracking-wide text-white">Chaos87</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- COLONNE DROITE (30%) : Espace Live Chat -->
+    <div class="w-[30%] h-full p-10 z-10 flex flex-col justify-center">
+        <!-- Cadre Chat (Glassmorphism) -->
+        <div class="chat-container w-full h-[85%] flex flex-col overflow-hidden relative">
+            
+            <!-- En-tête -->
+            <div class="chat-header py-6 flex-shrink-0 text-center">
+                <h3 class="font-montserrat text-xl font-bold tracking-[0.2em] text-white drop-shadow-[0_0_8px_var(--color-cyan)] uppercase">
+                    Live Chat
+                </h3>
+            </div>
+            
+            <!-- Zone vide réservée pour OBS -->
+            <div class="flex-grow w-full relative flex items-center justify-center">
+                <span class="font-montserrat text-center text-sm px-6 opacity-30 text-cyan-100">
+                    Place la source OBS Chat ici
+                </span>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
